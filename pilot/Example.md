@@ -4,7 +4,7 @@ We want to make a website?! OK thats awesome
 What do we need?
 * HTML: The language for presenting the content.
 * CSS: The language for fancyfying the content. (#Desgin)
-* Javascript,Jquery: Because we want to be a cool non-90s website.
+* Javascript, Jquery: Because we want to be a cool non-90s website.
 
 Oh wait ... but where will this run?
 So we also need:
@@ -34,3 +34,5 @@ as they go along.
 # New Infrastructure Topic(s)
 * Bash ( ssh, scp, sudo )
 * Package Managers
+
+
