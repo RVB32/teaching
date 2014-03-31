@@ -2,6 +2,8 @@
 
 PROMPT="Looks like you're done! :)"
 
+LEARNING_FOLDER=~/learning
+
 function learning_folder_exists () {
   if [ -d $LEARNING_FOLDER ]
   then
@@ -12,9 +14,9 @@ function learning_folder_exists () {
 }
 
 function touched_files_exist () {
-  if [ -f ~/learning/A ];   then A='t'; else A='f' ; fi
-  if [ -f ~/learning/B ];   then B='t'; else B='f' ; fi
-  if [ -h ~/learning/C/D ]; then D='t'; else D='f' ; fi
+  if [ -f $LEARNING_FOLDER/A ];   then A='t'; else A='f' ; fi
+  if [ -f $LEARNING_FOLDER/B ];   then B='t'; else B='f' ; fi
+  if [ -h $LEARNING_FOLDER/C/D ]; then D='t'; else D='f' ; fi
 
   case "$A$B$D" in
     ttt) echo 'Please remove file B' ;;
@@ -31,8 +33,8 @@ function touched_files_exist () {
 }
 
 function symbolic_links () {
-  if [ -d ~/learning/C ];   then C='t'; else C='f' ; fi
-  if [ -h ~/learning/C/D ]; then D='t'; else D='f' ; fi
+  if [ -d $LEARNING_FOLDER/C ];   then C='t'; else C='f' ; fi
+  if [ -h $LEARNING_FOLDER/C/D ]; then D='t'; else D='f' ; fi
 
   case "$C$D" in
     tt) echo '';; # we're done here
@@ -44,9 +46,29 @@ function symbolic_links () {
   esac
 }
 
+function edit_file () {
+
+  if [ $(uname) == 'Darwin' ];
+  then
+    SUM=$(md5 $LEARNING_FOLDER/C/D 2> /dev/null | awk '{print $4}')
+  else
+    SUM=$(md5sum $LEARNING_FOLDER/C/D 2> /dev/null)
+  fi
+
+  case "$SUM" in
+    0) echo "Add the word 'cat' to your file D. $SUM" ;;
+    54b8617eca0e54c7d3c8e6732c6b687a) echo '' ;;
+    * ) echo "Text doesn't seem to match" ;;
+  esac
+
+}
+
 
 
 function add_instructions () {
+
+  tmp=$(edit_file)
+  if [ -n "$tmp" ]; then PROMPT=$tmp; fi
 
   tmp=$(symbolic_links)
   if [ -n "$tmp" ]; then PROMPT=$tmp; fi
