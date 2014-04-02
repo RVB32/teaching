@@ -1,0 +1,17 @@
+mkdir learning | does learning exist
+
+cd into directory
+
+touch file1 | does file1 exist?
+
+copy file1 and call it file3 | does file3 exist?, if not, does file2 exist
+
+rename file3 to file2 | file2 exist?
+
+add SomeString to file2 | size of file2 > 0
+
+delete file1 | does file 1 exist?, if not, does file2 exist
+
+ssh to $'SpecificHost'@ccs.io | is $'SpecificHost'@ccs.io in known hosts?
+
+scp $'specialFile' from $'SpecificHost'@ccs.io to . | does $'specialFile' exist&&MD5sum
